@@ -85,5 +85,70 @@ dependencies {
         app:mapbox_cameraPitch="0.0"
         app:mapbox_cameraBearing="0.0" />
 ```
-![image](https://github.com/user-attachments/assets/811ad083-3426-4511-9507-2ff8cb8f95d8)
+### Izbiranje stila zemljevida
+```kt
+binding.streetsButton.setOnClickListener {
+            mapView.mapboxMap.loadStyle(Style.MAPBOX_STREETS)
+        }
+        binding.lightButton.setOnClickListener {
+            mapView.mapboxMap.loadStyle(Style.LIGHT)
+        }
+        binding.darkButton.setOnClickListener {
+            mapView.mapboxMap.loadStyle(Style.DARK)
+        }
+        binding.satelliteStreetsButton.setOnClickListener {
+            mapView.mapboxMap.loadStyle(Style.SATELLITE_STREETS)
+        }
+```
+![image](https://github.com/user-attachments/assets/811ad083-3426-4511-9507-2ff8cb8f95d8)![image](https://github.com/user-attachments/assets/f4ca4614-dad6-4487-b858-62eeee84f37d)![image](https://github.com/user-attachments/assets/4e186f93-984f-4fa8-9b0d-5ed823fe1aa9)
+
+### Dodajanje točk na zemljevidu
+```kt
+private fun addMarker(point: Point, style: Style) {
+        val drawable = ContextCompat.getDrawable(this, R.drawable.red_marker)!!
+        val originalBitmap = drawable.toBitmap()
+        val aspectRatio = originalBitmap.width.toFloat() / originalBitmap.height.toFloat()
+        val width = 50 // Desired width
+        val height = (width / aspectRatio).toInt() // Calculate height to maintain aspect ratio
+        val bitmap = Bitmap.createScaledBitmap(originalBitmap, width, height, false)
+
+        if (!style.styleSourceExists("marker-source-id")) {
+            style.addImage("marker-icon-id", bitmap)
+            style.addSource(
+                geoJsonSource("marker-source-id") {
+                    geometry(point)
+                }
+            )
+            style.addLayer(
+                symbolLayer("marker-layer-id", "marker-source-id") {
+                    iconImage("marker-icon-id")
+                    iconAnchor(IconAnchor.BOTTOM)
+                }
+            )
+        }
+    }
+
+    private fun drawLine(style: Style) {
+        if (!style.styleSourceExists("line-source-id")) {
+            style.addSource(
+                geoJsonSource("line-source-id") {
+                    geometry(com.mapbox.geojson.LineString.fromLngLats(points))
+                }
+            )
+            style.addLayer(
+                lineLayer("line-layer-id", "line-source-id") {
+                    lineColor(Color.RED)
+                    lineWidth(2.0)
+                }
+            )
+        }
+    }
+```
+![ezgif-1-87555676e5](https://github.com/user-attachments/assets/33eb2f4c-9842-43f3-90bd-987f770a821d)
+
+### Integracija v aplikaciji
+![ezgif-1-d3cd084b44](https://github.com/user-attachments/assets/6114f8da-a35c-48db-bb69-73723e84b691)
+
+
+
 
