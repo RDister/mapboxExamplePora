@@ -48,7 +48,7 @@ Ustvarimo novo
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="mapbox_access_token" translatable="false" tools:ignore="UnusedResources">pk.eyJ1IjoibWF0ZWpyYWp0ZXIiLCJhIjoiY201d3JtdHRvMDEyZTJrc2NpMG1pbTZiZiJ9.PO1fUDOu46ATQ_zbZ9T38w</string>
+    <string name="mapbox_access_token" translatable="false" tools:ignore="UnusedResources">PUBLIC_TOKEN</string>
 </resources>
 ```
 ### Dovoljenja
