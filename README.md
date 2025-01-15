@@ -59,7 +59,7 @@ V `AndroidManifest.xml` dodamo potrebna dovoljenja
 <!-- Include only if your app benefits from precise location access. -->
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
-### Dovoljenja
+### Odvisnosti
 V `settings.gradle.kts` dodamo 
 ```kts
 // Mapbox Maven repository
